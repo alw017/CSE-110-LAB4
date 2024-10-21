@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { Expense } from "../../types/types";
 const AddExpenseForm = () => {
@@ -18,7 +18,20 @@ const AddExpenseForm = () => {
     const newExpenses : Expense[] = expensesContext.expenses.concat(newExpense);
 
     expensesContext.setExpenses(newExpenses);
+
+    console.log(expensesContext.expenses);
   };
+  
+  useEffect(() => {
+    const totalExpenses = expensesContext.expenses.reduce((total, item) => {
+        return (total = total + item.cost);
+    }, 0);
+
+    if(totalExpenses > 1000) {
+        alert("You have exceeded your budget!");
+    }
+
+  }, [expensesContext.expenses]);
 
   const changeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     let name = event.currentTarget.value;
