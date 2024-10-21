@@ -21,7 +21,7 @@ const AddExpenseForm = () => {
 
     console.log(expensesContext.expenses);
   };
-  
+
   useEffect(() => {
     const totalExpenses = expensesContext.expenses.reduce((total, item) => {
         return (total = total + item.cost);
@@ -52,6 +52,7 @@ const AddExpenseForm = () => {
           <label htmlFor="name">Name</label>
           <input
             required
+            data-testid="name-form"
             type="text"
             className="form-control"
             id="name"
@@ -64,6 +65,7 @@ const AddExpenseForm = () => {
           <input
             required
             type="text"
+            data-testid="cost-form"
             className="form-control"
             id="cost"
             value={cost}

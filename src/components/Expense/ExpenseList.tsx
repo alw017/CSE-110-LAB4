@@ -7,7 +7,7 @@ const ExpenseList = () => {
   const { expenses } = useContext(AppContext);
 
   return (
-    <ul className="list-group">
+    <ul data-testid="expense-list" className="list-group">
       {expenses.map((expense: Expense) => (
         <ExpenseItem id={expense.id} name={expense.name} cost={expense.cost} />
       ))}
