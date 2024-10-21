@@ -13,13 +13,32 @@ const AddExpenseForm = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // check input is valid number
+    const testValidInput = parseFloat(cost);
+    if (isNaN(testValidInput) || !isFinite(testValidInput)) {
+        const costInputForm = document.getElementById("cost") as HTMLInputElement;
+        costInputForm.setCustomValidity("Input must be a valid number.");
+        costInputForm.reportValidity();
+        return;
+    }
+    
+    // check cost is positive
+    if (testValidInput < 0) {
+        const costInputForm = document.getElementById("cost") as HTMLInputElement;
+        costInputForm.setCustomValidity("Cost must be positive.");
+        costInputForm.reportValidity();
+        return;
+    }
+
+
     // Exercise: Add add new expense to expenses context array
-    const newExpense : Expense = {id: name, name: name, cost: parseFloat(cost)}
+    const newExpense : Expense = {id: expensesContext.id.toString(), name: name, cost: parseFloat(cost)}
     const newExpenses : Expense[] = expensesContext.expenses.concat(newExpense);
 
+    expensesContext.setId(expensesContext.id + 1);
     expensesContext.setExpenses(newExpenses);
 
-    console.log(expensesContext.expenses);
+    console.log(expensesContext.id);
   };
 
   useEffect(() => {
@@ -40,6 +59,7 @@ const AddExpenseForm = () => {
   };
 
   const changeCost = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.currentTarget.setCustomValidity('');
     let costStr = event.currentTarget.value;
     console.log("cost change to", costStr);
     setCost(costStr);
