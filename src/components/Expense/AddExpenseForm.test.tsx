@@ -23,7 +23,7 @@ describe('Creating Expenses', () => {
         expect(screen.getByText("$100")).toBeInTheDocument();
 
         expect(screen.getByText("Remaining: $9900")).toBeInTheDocument();
-        expect(screen.getByText("Spent so far: $100")).not.toBeInTheDocument();
+        expect(screen.getByText("Spent so far: $100")).toBeInTheDocument();
     });
     
     test('Negative Cost', () => {
