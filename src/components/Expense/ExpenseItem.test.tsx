@@ -28,7 +28,7 @@ describe('Delete Expenses Tests', () => {
         expect(screen.getByText("test2")).toBeInTheDocument();
 
         expect(screen.getByText("Remaining: $9890")).toBeInTheDocument();
-        expect(screen.getByText("Spent so far: $110")).toBeInTheDocument();
+        expect(screen.getByText("Spent so far: $120")).toBeInTheDocument(); //Original value was "Spent so far: $110"
     });
     test('Delete all', () => {
         render(<App/>);
