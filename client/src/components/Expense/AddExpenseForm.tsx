@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { Expense } from "../../types/types";
+import { createExpense } from "../../utils/expense-utils";
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
   const expensesContext = useContext(AppContext);
@@ -32,10 +33,11 @@ const AddExpenseForm = () => {
 
 
     // Exercise: Add add new expense to expenses context array
-    const newExpense : Expense = {id: expensesContext.id.toString(), name: name, cost: parseFloat(cost)}
+    const newExpense : Expense = {id: expensesContext.id.toString(), description: name, cost: parseFloat(cost)}
     const newExpenses : Expense[] = expensesContext.expenses.concat(newExpense);
 
     expensesContext.setId(expensesContext.id + 1);
+    createExpense(newExpense);
     expensesContext.setExpenses(newExpenses);
 
     console.log(expensesContext.id);
